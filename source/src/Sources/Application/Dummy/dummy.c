@@ -186,27 +186,27 @@ void STATE_MACHINE(void)
 void idle(void)
 {
 	if(((WINDOW_OPEN == ACTIVATED) && (WINDOW_CLOSE == DEACTIVATED)) && (rsb_BarLed1 > BarLed_UnderFlow))
-					{
-						ruw_time_counter++;
-						if(ruw_time_counter >= T_10ms)
-						{
-							rub_state=	WINDOWAUTO_OPENING;
-							ruw_time_counter = T_0ms;		
-						}
-					}
-					else if(((WINDOW_OPEN == DEACTIVATED) && (WINDOW_CLOSE == ACTIVATED)) && (rsb_BarLed1 < BarLed_OverFlow))
-					{
-						ruw_time_counter++;
-						if(ruw_time_counter >= T_10ms)
-						{
-							rub_state=	WINDOWAUTO_CLOSING;
-							ruw_time_counter = T_0ms;		
-						}
-					}
-					else 
-					{
-						ruw_time_counter=T_0ms;
-					}
+	{
+		ruw_time_counter++;
+		if(ruw_time_counter >= T_10ms)
+		{
+			rub_state=	WINDOWAUTO_OPENING;
+			ruw_time_counter = T_0ms;		
+		}
+	}
+	else if(((WINDOW_OPEN == DEACTIVATED) && (WINDOW_CLOSE == ACTIVATED)) && (rsb_BarLed1 < BarLed_OverFlow))
+	{
+		ruw_time_counter++;
+		if(ruw_time_counter >= T_10ms)
+		{
+			rub_state=	WINDOWAUTO_CLOSING;
+			ruw_time_counter = T_0ms;		
+		}
+	}
+		else 
+		{
+			ruw_time_counter=T_0ms;
+		}
 }
 
 /**************************************************************
@@ -251,7 +251,7 @@ void windowmanual_opening(void)
 
 void windowmanual_closing(void)
 {
-	if(ANTI_PINCH_ACTIVATED == ACTIVATED)
+	if((ANTI_PINCH_ACTIVATED == ACTIVATED) && (rsb_BarLed1 < CLOSE))
 					{
 						ruw_counter_anti_pinch++;
 						if(ruw_counter_anti_pinch >= BarLed_OverFlow)
@@ -353,7 +353,7 @@ void windowauto_closing(void)
 	{
 		LED_ON(LED_BLUE);	
 	}
-					if(ANTI_PINCH_ACTIVATED == ACTIVATED)
+					if((ANTI_PINCH_ACTIVATED == ACTIVATED) && (rsb_BarLed1 < CLOSE))
 					{
 						ruw_counter_anti_pinch++;
 						if(ruw_counter_anti_pinch >= T_10ms)
