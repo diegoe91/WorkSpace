@@ -66,6 +66,7 @@ typedef enum
 
 T_UBYTE rub_state = IDLE; 			/* Initialize the first state of the finite states machine */
 T_SBYTE rsb_BarLed1=9;  			/* variable that controls the bar led */
+T_UBYTE rub_auto_flag=0;			/* flag to control auto and manual mode */
 
 /* WORD RAM variables */
 
@@ -301,7 +302,7 @@ void windowauto_opening(void)
 		LED_ON(LED_GREEN);	
 	}
 		
-					 if(((WINDOW_OPEN == ACTIVATED) && (WINDOW_CLOSE == DEACTIVATED)) && (rsb_BarLed1 > BarLed_UnderFlow))
+					 if((((WINDOW_OPEN == ACTIVATED) && (WINDOW_CLOSE == DEACTIVATED)) && (rsb_BarLed1 > BarLed_UnderFlow) && rub_auto_flag == DEACTIVATED))
 					 {
 					 		if((ruw_time_counter==T_0ms || ruw_time_counter==T_400ms))
 					 		{
@@ -314,7 +315,8 @@ void windowauto_opening(void)
 					 		}
 					 }
 					 else if(rsb_BarLed1 > BarLed_UnderFlow)
-					 {
+					 {	
+					 	rub_auto_flag = ACTIVATED;
 					 	if((ruw_time_counter==T_400ms) || (ruw_time_counter>=T_800ms))
 					 	{
 					 	    WINDOW_BARLED_OPEN(rsb_BarLed1);
@@ -327,7 +329,8 @@ void windowauto_opening(void)
 					 }
 					 ruw_time_counter++;
 					 if(rsb_BarLed1 <= BarLed_UnderFlow)
-					 {
+					 {	
+					 	rub_auto_flag = DEACTIVATED;
 					 	rub_state=	IDLE;
 					 	ruw_time_counter=T_0ms;
 					 	rsb_BarLed1=OPEN;
@@ -365,7 +368,7 @@ void windowauto_closing(void)
 						ruw_counter_anti_pinch=T_0ms;
 					}
 					
-					if(((WINDOW_OPEN == DEACTIVATED) && (WINDOW_CLOSE == ACTIVATED)) && (rsb_BarLed1 < BarLed_OverFlow))
+					if((((WINDOW_OPEN == DEACTIVATED) && (WINDOW_CLOSE == ACTIVATED)) && (rsb_BarLed1 < BarLed_OverFlow)) && rub_auto_flag == DEACTIVATED)
 					 {
 					 		if((ruw_time_counter==T_10ms || ruw_time_counter==T_400ms))
 					 		{
@@ -379,6 +382,7 @@ void windowauto_closing(void)
 					 }
 					 else if(rsb_BarLed1 < BarLed_OverFlow)
 					 {
+					 	rub_auto_flag = ACTIVATED;
 					 	if((ruw_time_counter==T_400ms) || (ruw_time_counter>=T_800ms))
 					 	{
 					 	    WINDOW_BARLED_CLOSE(rsb_BarLed1);
@@ -392,6 +396,7 @@ void windowauto_closing(void)
 					 ruw_time_counter++;
 					 if(rsb_BarLed1 >= BarLed_OverFlow)
 					 {
+					 	rub_auto_flag = DEACTIVATED;
 					 	rub_state=	IDLE;
 					 	rsb_BarLed1=CLOSE;
 					 	ruw_time_counter=T_0ms;
