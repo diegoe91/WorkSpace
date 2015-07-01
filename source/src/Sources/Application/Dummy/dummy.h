@@ -1,62 +1,81 @@
-/*******************************************************************************/
-/**
-\file       dummy.h
-\brief      Dummy Functions
-\author     Francisco Martinez
-\version    1.0
-\date       04/04/2014
-*/
-/*******************************************************************************/
+/*============================================================================*/
+/*                        SV C BC SOFTWARE GROUP                              */
+/*============================================================================*/
+/*                        OBJECT SPECIFICATION                                */
+/*============================================================================*
+* C Include:        dummy.h
+* Instance:         RPL_1
+* %version:         1 
+* %created_by:      Diego Flores
+* %date_created:    Wendsday July 01 10:55:01 2015 
+*=============================================================================*/
+/* DESCRIPTION : Header file template                                         */
+/*============================================================================*/
+/* FUNCTION COMMENT : contains only symbols which are exported to internal    */
+/* platform modules. This will not be delivered with the library              */
+/*                                                                            */
+/*============================================================================*/
+/*                               OBJECT HISTORY                               */
+/*============================================================================*/
+/*  REVISION |   DATE      |                               |      AUTHOR      */
+/*----------------------------------------------------------------------------*/
+/*  1.0      | DD/MM/YYYY  | SAR/SIF/SCN_xxx               | Mr. Template     */
+/* Integration under Continuus CM                                             */
+/*============================================================================*/
 
-#ifndef _DUMMY_H        /*prevent duplicated includes*/
+#ifndef _DUMMY_H                               /* To avoid double inclusion */
 #define _DUMMY_H
 
-/*-- Includes ----------------------------------------------------------------*/
-#define T_0ms				  0
-#define T_10ms	     		 10
-#define T_400ms				400
-#define T_500ms				500
-#define T_800ms				800
-#define T_5s			   5000
-#define OPEN				  0
-#define CLOSE				  9
-#define BarLed_OverFlow		 10
-#define BarLed_UnderFlow	 -1
-
-/** Core modules */
-/** Variable types and common definitions */
-
+/* Includes */
+/* -------- */
 #include "typedefs.h"
 
-/*-- Variables ---------------------------------------------------------------*/
+/* Exported types and constants */
+/* ---------------------------- */
 
-/*-- Types Definitions -------------------------------------------------------*/
-
-/* States of the finite state machine */
-typedef enum
-{
-	IDLE,
-	WINDOWMANUAL_OPENING,
-	WINDOWMANUAL_CLOSING,
-	WINDOWAUTO_OPENING,
-	WINDOWAUTO_CLOSING,
-	ANTI_PINCH
-	
-}STATES;
-
-/*-- Defines -----------------------------------------------------------------*/
+/* Types definition */
+/* typedef */
 
 
-/*-- Function Prototypes -----------------------------------------------------*/
+/*==================================================*/ 
+/* Declaration of exported constants                */
+/*==================================================*/ 
+/* BYTE constants */
 
-void STATE_MACHINE(void);
-void idle(void);
-void windowmanual_opening(void);
-void windowmanual_closing(void);
-void windowauto_opening(void);
-void windowauto_closing(void);
-void anti_pinch(void);
+
+/* WORD constants */
+
+
+/* LONG and STRUCTURE constants */
+
+
+
+/*======================================================*/ 
+/* Definition of RAM variables                          */
+/*======================================================*/ 
+/* BYTES */
+
+
+/* WORDS */
+
+
+/* LONGS and STRUCTURES */
+
+
+/*======================================================*/ 
+/* close variable declaration sections                  */
+/*======================================================*/ 
+
+/* Exported functions prototypes and macros */
+/* ---------------------------------------- */
+
+/* Functions prototypes */
+extern void STATE_MACHINE(void);
+
+/* Functions macros */
+
+
+/* Exported defines */
+
 
 #endif /* _DUMMY_H */
-
-/*******************************************************************************/

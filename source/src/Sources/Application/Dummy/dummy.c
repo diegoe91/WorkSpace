@@ -1,19 +1,30 @@
-/*******************************************************************************/
-/**
-\file       dummy.c
-\brief      Dummy Functions
-\author     Francisco Martinez
-\version    1.0
-\date       04/04/2014
-*/
-/****************************************************************************************************/
+/*============================================================================*/
+/*                        SV C CE SOFTWARE GROUP                              */
+/*============================================================================*/
+/*                        OBJECT SPECIFICATION                                */
+/*============================================================================*
+* C Source:         dummy.c
+* Instance:         RPL_1
+* %version:         1
+* %created_by:      Diego Flores
+* %date_created:    Wend Jul  01 11:00:00 2015 %
+*=============================================================================*/
+/* DESCRIPTION : C source template file                                       */
+/*============================================================================*/
+/* FUNCTION COMMENT : This file describes the C source template according to  */
+/* the new software platform                                                  */
+/*                                                                            */
+/*============================================================================*/
+/*                               OBJECT HISTORY                               */
+/*============================================================================*/
+/*  REVISION |   DATE      |                               |      AUTHOR      */
+/*----------------------------------------------------------------------------*/
+/*  1.0      | 07/01/2015  |                               | Diego Flores     */
+/* Integration under Continuus CM                                             */
+/*============================================================================*/
 
-/*****************************************************************************************************
-* Include files
-*****************************************************************************************************/
-
-/** Core modules */
-/** Variable types and common definitions */
+/* Includes */
+/* -------- */
 #include "typedefs.h"
 
 /** Own headers */
@@ -22,46 +33,112 @@
 /* GPIO routines prototypes */ 
 #include "GPIO.h"
 
-/** Used modules */
+/* Functions macros, constants, types and datas         */
+/* ---------------------------------------------------- */
+/* Functions macros */
 
-/*****************************************************************************************************
-* Definition of module wide VARIABLEs 
-*****************************************************************************************************/
+/*==================================================*/ 
+/* Definition of constants                          */
+/*==================================================*/ 
+/* BYTE constants */
+
+
+/* WORD constants */
+
+
+/* LONG and STRUCTURE constants */
+
+typedef enum
+{
+	IDLE,
+	WINDOWMANUAL_OPENING,
+	WINDOWMANUAL_CLOSING,
+	WINDOWAUTO_OPENING,
+	WINDOWAUTO_CLOSING,
+	ANTI_PINCH
+	
+}STATES;
+
+/*======================================================*/ 
+/* Definition of RAM variables                          */
+/*======================================================*/ 
+/* BYTE RAM variables */
 
 T_UBYTE rub_state = IDLE; 			/* Initialize the first state of the finite states machine */
-T_UWORD ruw_time_counter = 0;  			/* Initialize the main time counter */
+T_SBYTE rsb_BarLed1=9;  			/* variable that controls the bar led */
+
+/* WORD RAM variables */
+
+T_UWORD ruw_time_counter = 0;  		/* Initialize the main time counter */
 T_UWORD ruw_counter_anti_pinch =0; 	/* Initialize the anti pinch counter */
 T_UWORD ruw_open =0; 			 	/* flag that checks if the window is totally open in the anti pinch */
 
-T_SBYTE rsb_BarLed1=9;  /* variable that controls the bar led */
-/*****************************************************************************************************
-* Declaration of module wide FUNCTIONs 
-*****************************************************************************************************/
-
-/*****************************************************************************************************
-* Definition of module wide MACROs / #DEFINE-CONSTANTs 
-*****************************************************************************************************/
-
-/*****************************************************************************************************
-* Declaration of module wide TYPEs 
-*****************************************************************************************************/
-
-/*****************************************************************************************************
-* Definition of module wide (CONST-) CONSTANTs 
-*****************************************************************************************************/
-
-/*****************************************************************************************************
-* Code of module wide FUNCTIONS
-*****************************************************************************************************/
+/* LONG and STRUCTURE RAM variables */
 
 
-/****************************************************************************************************/
-/**
-* \brief    State machine that controls all functions of the window lifter 
-* \author   Diego Flores
-* \return   void
-*/
+/*======================================================*/ 
+/* close variable declaration sections                  */
+/*======================================================*/ 
 
+/* Private defines */
+
+#define T_0ms				  0
+#define T_10ms	     		 10
+#define T_400ms				400
+#define T_500ms				500
+#define T_800ms				800
+#define T_5s			   5000
+#define OPEN				  0
+#define CLOSE				  9
+#define BarLed_OverFlow		 10
+#define BarLed_UnderFlow	 -1
+#define ACTIVATED			  1
+#define DEACTIVATED			  0
+
+/* Private functions prototypes */
+/* ---------------------------- */
+void idle(void);
+void windowmanual_opening(void);
+void windowmanual_closing(void);
+void windowauto_opening(void);
+void windowauto_closing(void);
+void anti_pinch(void);
+
+
+/* Exported functions prototypes */
+/* ----------------------------- */
+
+/* Inline functions */
+/* ---------------- */
+/**************************************************************
+ *  Name                 : inline_func	2
+ *  Description          :
+ *  Parameters           :  [Input, Output, Input / output]
+ *  Return               :
+ *  Critical/explanation :    [yes / No]
+ **************************************************************/
+ 
+
+/* Private functions */
+/* ----------------- */
+/**************************************************************
+ *  Name                 : private_func
+ *  Description          :
+ *  Parameters           :  [Input, Output, Input / output]
+ *  Return               :
+ *  Critical/explanation :    [yes / No]
+ **************************************************************/
+
+
+/* Exported functions */
+/* ------------------ */
+/**************************************************************
+ *  Name                 :	STATE_MACHINE
+ *  Description          :  Finite State machine that controls all functions of the window lifter
+ *  Parameters           :  [Input, Output, Input / output]
+ *  Return               :  nothing
+ *  Critical/explanation :    [yes / No]
+ **************************************************************/
 void STATE_MACHINE(void)
 {
 	switch (rub_state)
@@ -97,12 +174,13 @@ void STATE_MACHINE(void)
 	}
 }
 
-/****************************************************************************************************/
-/**
-* \brief    This function awaits for the correct detection of the buttons  
-* \author   Diego Flores
-* \return   void
-*/
+/**************************************************************
+ *  Name                 :	idle
+ *  Description          :  This function awaits for the correct detection of the buttons
+ *  Parameters           :  [Input, Output, Input / output]
+ *  Return               :  nothing
+ *  Critical/explanation :    [yes / No]
+ **************************************************************/
 
 void idle(void)
 {
@@ -130,12 +208,13 @@ void idle(void)
 					}
 }
 
-/****************************************************************************************************/
-/**
-* \brief    function that opens the window in the mode manual 
-* \author   Diego Flores
-* \return   void
-*/
+/**************************************************************
+ *  Name                 :	windowmanual_opening
+ *  Description          :  function that opens the window in the manual mode
+ *  Parameters           :  [Input, Output, Input / output]
+ *  Return               :  nothing
+ *  Critical/explanation :    [yes / No]
+ **************************************************************/
 
 void windowmanual_opening(void)
 {
@@ -161,12 +240,13 @@ void windowmanual_opening(void)
 					}
 }
 
-/****************************************************************************************************/
-/**
-* \brief    function that closes the window in the mode manual  
-* \author   Diego Flores
-* \return   void
-*/
+/**************************************************************
+ *  Name                 :	windowmanual_closing
+ *  Description          :  function that closes the window in the manual mode
+ *  Parameters           :  [Input, Output, Input / output]
+ *  Return               :  nothing
+ *  Critical/explanation :    [yes / No]
+ **************************************************************/
 
 void windowmanual_closing(void)
 {
@@ -206,13 +286,13 @@ void windowmanual_closing(void)
 					}
 }
 
-/****************************************************************************************************/
-/**
-* \brief    function that opens the window in the mode auto  
-* \author   Diego Flores
-* \return   void
-*/
-
+/**************************************************************
+ *  Name                 :	windowauto_opening
+ *  Description          :  function that opens the window in the auto mode
+ *  Parameters           :  [Input, Output, Input / output]
+ *  Return               :  nothing
+ *  Critical/explanation :    [yes / No]
+ **************************************************************/
 
 void windowauto_opening(void)
 {
@@ -255,14 +335,15 @@ void windowauto_opening(void)
 					 }
 }
 
-/****************************************************************************************************/
-/**
-* \brief    function that closes the window in the mode auto  
-* \author   Diego Flores
-* \return   void
-*/
 
-
+/**************************************************************
+ *  Name                 :	windowauto_closing
+ *  Description          :  function that closes the window in the auto mode
+ *  Parameters           :  [Input, Output, Input / output]
+ *  Return               :  nothing
+ *  Critical/explanation :    [yes / No]
+ **************************************************************/
+ 
 void windowauto_closing(void)
 {
 	if(rsb_BarLed1<CLOSE)
@@ -318,13 +399,14 @@ void windowauto_closing(void)
 					 }
 }
 
-/****************************************************************************************************/
-/**
-* \brief    function that controls the anti pinch button  
-* \author   Diego Flores
-* \return   void
-*/
-
+/**************************************************************
+ *  Name                 :	anti_pinch
+ *  Description          :  function that controls the anti pinch button
+ *  Parameters           :  [Input, Output, Input / output]
+ *  Return               :  nothing
+ *  Critical/explanation :    [yes / No]
+ **************************************************************/
+ 
 void anti_pinch(void)
 {
 	if((rsb_BarLed1 > BarLed_UnderFlow) && (ruw_open == DEACTIVATED))

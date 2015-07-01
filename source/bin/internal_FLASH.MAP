@@ -72,15 +72,15 @@ Link map of __start
     3] .ivor_branch_table (section,local) found in ivor_branch_table.o 
     3] .ivor_branch_table.24 (notype,local) found in ivor_branch_table.o 
     3] .text (section,local) found in main.o 
-    3] .text.42 (notype,local) found in main.o 
+    3] .text.39 (notype,local) found in main.o 
     3] .text (section,local) found in pll.o 
     3] .text.23 (notype,local) found in pll.o 
     3] .text (section,local) found in dummy.o 
-    3] .text.146 (notype,local) found in dummy.o 
+    3] .text.144 (notype,local) found in dummy.o 
     3] .text (section,local) found in PIT.o 
     3] .text.44 (notype,local) found in PIT.o 
     3] .text (section,local) found in GPIO.o 
-    3] .text.64 (notype,local) found in GPIO.o 
+    3] .text.52 (notype,local) found in GPIO.o 
     3] .init (section,local) found in Runtime.PPCEABI.VS.UC.a __start.o
     3] .init.130 (notype,local) found in Runtime.PPCEABI.VS.UC.a __start.o
     3] .text (section,local) found in Runtime.PPCEABI.VS.UC.a runtime.o
@@ -178,7 +178,7 @@ Link map of __start
   UNUSED   000004 ........ ........    Function1 main.o 
   00000172 000044 00002172 00000852  2 main 	main.o 
   UNUSED   00004a ........ ........    BackgroundSubsystemTasks main.o 
-  000001b6 000000 000021b6 00000896  1 .text.42 	main.o 
+  000001b6 000000 000021b6 00000896  1 .text.39 	main.o 
   000001b6 000088 000021b6 00000896  1 .text 	pll.o 
   000001b6 000088 000021b6 00000896  2 initModesAndClock 	pll.o 
   UNUSED   00000c ........ ........    initPeriClkGen pll.o 
@@ -191,7 +191,7 @@ Link map of __start
   000004ac 000102 000024ac 00000b8c  2 windowauto_opening 	dummy.o 
   000005ae 000136 000025ae 00000c8e  2 windowauto_closing 	dummy.o 
   000006e4 0000c2 000026e4 00000dc4  2 anti_pinch 	dummy.o 
-  000007a6 000000 000027a6 00000e86  1 .text.146 	dummy.o 
+  000007a6 000000 000027a6 00000e86  1 .text.144 	dummy.o 
   000007a6 0000d4 000027a6 00000e86  1 .text 	PIT.o 
   000007a6 00000a 000027a6 00000e86  2 PIT_device_init 	PIT.o 
   000007b0 00005e 000027b0 00000e90  2 PIT_channel_configure 	PIT.o 
@@ -199,16 +199,15 @@ Link map of __start
   UNUSED   000018 ........ ........    PIT_channel_stop PIT.o 
   00000826 000054 00002826 00000f06  2 PIT_channel_0_isr 	PIT.o 
   0000087a 000000 0000287a 00000f5a  1 .text.44 	PIT.o 
-  0000087a 000252 0000287a 00000f5a  1 .text 	GPIO.o 
-  0000087a 0000d2 0000287a 00000f5a  2 vfnGPIO_Init_channel 	GPIO.o 
-  0000094c 00001e 0000294c 0000102c  2 vfnGPIO_Output 	GPIO.o 
-  UNUSED   000128 ........ ........    vfnGPIO_FlashMainLED GPIO.o 
-  0000096a 00012a 0000296a 0000104a  2 vfnGPIO_LED_Init 	GPIO.o 
-  00000a94 00001c 00002a94 00001174  2 WINDOW_BARLED_OPEN 	GPIO.o 
-  00000ab0 00001c 00002ab0 00001190  2 WINDOW_BARLED_CLOSE 	GPIO.o 
-  00000acc 000000 00002acc 000011ac  1 .text.64 	GPIO.o 
-  00000acc 000064 00002acc 000011ac  1 .text 	Runtime.PPCEABI.VS.UC.a runtime.o
-  00000acc 00004a 00002acc 000011ac  2 __save_gpr 	Runtime.PPCEABI.VS.UC.a runtime.o
+  0000087a 000250 0000287a 00000f5a  1 .text 	GPIO.o 
+  0000087a 00001e 0000287a 00000f5a  2 vfnGPIO_Output 	GPIO.o 
+  00000898 0000d2 00002898 00000f78  2 vfnGPIO_Init_channel 	GPIO.o 
+  0000096a 000128 0000296a 0000104a  2 vfnGPIO_LED_Init 	GPIO.o 
+  00000a92 00001c 00002a92 00001172  2 WINDOW_BARLED_OPEN 	GPIO.o 
+  00000aae 00001c 00002aae 0000118e  2 WINDOW_BARLED_CLOSE 	GPIO.o 
+  00000aca 000000 00002aca 000011aa  1 .text.52 	GPIO.o 
+  00000aca 000064 00002aca 000011aa  1 .text 	Runtime.PPCEABI.VS.UC.a runtime.o
+  00000aca 00004a 00002aca 000011aa  2 __save_gpr 	Runtime.PPCEABI.VS.UC.a runtime.o
   UNUSED   000000 ........ ........    _savegpr_14 Runtime.PPCEABI.VS.UC.a runtime.o
   UNUSED   000000 ........ ........    _save32gpr_14 Runtime.PPCEABI.VS.UC.a runtime.o
   UNUSED   000000 ........ ........    _savegpr_15 Runtime.PPCEABI.VS.UC.a runtime.o
@@ -241,7 +240,7 @@ Link map of __start
   UNUSED   000000 ........ ........    _save32gpr_28 Runtime.PPCEABI.VS.UC.a runtime.o
   UNUSED   000000 ........ ........    _savegpr_29 Runtime.PPCEABI.VS.UC.a runtime.o
   UNUSED   000000 ........ ........    _save32gpr_29 Runtime.PPCEABI.VS.UC.a runtime.o
-  00000b0c 000000 00002b0c 000011ec    _savegpr_30 (entry of __save_gpr) 	Runtime.PPCEABI.VS.UC.a runtime.o
+  00000b0a 000000 00002b0a 000011ea    _savegpr_30 (entry of __save_gpr) 	Runtime.PPCEABI.VS.UC.a runtime.o
   UNUSED   000000 ........ ........    _save32gpr_30 Runtime.PPCEABI.VS.UC.a runtime.o
   UNUSED   000000 ........ ........    _savegpr_31 Runtime.PPCEABI.VS.UC.a runtime.o
   UNUSED   000000 ........ ........    _save32gpr_31 Runtime.PPCEABI.VS.UC.a runtime.o
@@ -282,11 +281,11 @@ Link map of __start
   UNUSED   000000 ........ ........    _rest32gpr_30 Runtime.PPCEABI.VS.UC.a runtime.o
   UNUSED   000000 ........ ........    _restgpr_31 Runtime.PPCEABI.VS.UC.a runtime.o
   UNUSED   000000 ........ ........    _rest32gpr_31 Runtime.PPCEABI.VS.UC.a runtime.o
-  00000b16 000008 00002b16 000011f6  2 __restore_frame_and_exit 	Runtime.PPCEABI.VS.UC.a runtime.o
-  00000b18 000000 00002b18 000011f8    __finish_restore_frame_and_exit2 (entry of __restore_frame_and_exit) 	Runtime.PPCEABI.VS.UC.a runtime.o
-  00000b1e 00000a 00002b1e 000011fe  2 __restore_gpr_31_exit 	Runtime.PPCEABI.VS.UC.a runtime.o
-  00000b24 000000 00002b24 00001204    __finish_restore_frame_and_exit (entry of __restore_gpr_31_exit) 	Runtime.PPCEABI.VS.UC.a runtime.o
-  00000b28 000008 00002b28 00001208  2 __restore_gpr_30_exit 	Runtime.PPCEABI.VS.UC.a runtime.o
+  00000b14 000008 00002b14 000011f4  2 __restore_frame_and_exit 	Runtime.PPCEABI.VS.UC.a runtime.o
+  00000b16 000000 00002b16 000011f6    __finish_restore_frame_and_exit2 (entry of __restore_frame_and_exit) 	Runtime.PPCEABI.VS.UC.a runtime.o
+  00000b1c 00000a 00002b1c 000011fc  2 __restore_gpr_31_exit 	Runtime.PPCEABI.VS.UC.a runtime.o
+  00000b22 000000 00002b22 00001202    __finish_restore_frame_and_exit (entry of __restore_gpr_31_exit) 	Runtime.PPCEABI.VS.UC.a runtime.o
+  00000b26 000008 00002b26 00001206  2 __restore_gpr_30_exit 	Runtime.PPCEABI.VS.UC.a runtime.o
   UNUSED   000008 ........ ........    __restore_gpr_29_exit Runtime.PPCEABI.VS.UC.a runtime.o
   UNUSED   000008 ........ ........    __restore_gpr_28_exit Runtime.PPCEABI.VS.UC.a runtime.o
   UNUSED   000008 ........ ........    __restore_gpr_27_exit Runtime.PPCEABI.VS.UC.a runtime.o
@@ -330,7 +329,7 @@ Link map of __start
   UNUSED   00001a ........ ........    __shl2i Runtime.PPCEABI.VS.UC.a runtime.o
   UNUSED   00001a ........ ........    __shr2u Runtime.PPCEABI.VS.UC.a runtime.o
   UNUSED   00001c ........ ........    __shr2i Runtime.PPCEABI.VS.UC.a runtime.o
-  00000b30 000000 00002b30 00001210  1 .text.205 	Runtime.PPCEABI.VS.UC.a runtime.o
+  00000b2e 000000 00002b2e 0000120e  1 .text.205 	Runtime.PPCEABI.VS.UC.a runtime.o
 
 
 .rodata section layout
@@ -398,7 +397,6 @@ extabindex section layout
   00000006 000002 4000134e 0000180e  2 ruw_open 	dummy.o 
   00000008 000001 40001350 00001810  1 .sbss 	GPIO.o 
   00000008 000001 40001350 00001810  1 rsb_BarLed 	GPIO.o 
-  UNUSED   000001 ........ ........    @LOCAL@vfnGPIO_FlashMainLED__Fv@u8Counter GPIO.o 
 
 
 .sdata2 section layout
@@ -442,12 +440,12 @@ Memory map:
                .sdata2 40001354 00000000 00001808 00003008 00003008          0
                 .sbss2 40001354 00000000 00001808 00003008 00003008          0
                   .bss 40001358 00000020 00001808 00003008 00003008          0
-      .PPC.EMB.apuinfo 00006698 00000000 00007ea0 000096a0 000096a0          0
+      .PPC.EMB.apuinfo 00006740 00000000 00007f50 00009748 00009748          0
          .debug_abbrev          0000013b 00001808
-           .debug_info          00001d91 00001943
-           .debug_line          00002f76 000036d4
-            .debug_loc          000005d2 0000664a
-       .debug_pubnames          00000545 00006c1c
+           .debug_info          00001dc7 00001943
+           .debug_line          00002fe8 0000370a
+            .debug_loc          000005d2 000066f2
+       .debug_pubnames          00000545 00006cc4
 
 
 Linker generated symbols:

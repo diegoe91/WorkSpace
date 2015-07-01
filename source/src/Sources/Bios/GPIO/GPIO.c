@@ -1,18 +1,30 @@
-/*******************************************************************************/
-/**
-\file       GPIO.c
-\brief      General purpose IO functions
-\author     Abraham Tezmol
-\version    1.0
-\date       31/10/2008
-*/
-/****************************************************************************************************/
+/*============================================================================*/
+/*                        SV C CE SOFTWARE GROUP                              */
+/*============================================================================*/
+/*                        OBJECT SPECIFICATION                                */
+/*============================================================================*
+* C Source:         %template.c%
+* Instance:         RPL_1
+* %version:         2 %
+* %created_by:      uid02495 %
+* %date_created:    Fri Jan  9 14:38:03 2004 %
+*=============================================================================*/
+/* DESCRIPTION : C source template file                                       */
+/*============================================================================*/
+/* FUNCTION COMMENT : General purpose IO functions                                                */
+/*                                                                            */
+/*============================================================================*/
+/*                               OBJECT HISTORY                               */
+/*============================================================================*/
+/*  REVISION |   DATE      |                               |      AUTHOR      */
+/*----------------------------------------------------------------------------*/
+/*  1.0      | DD/MM/YYYY  |                               | Mr. Template     */
+/* Integration under Continuus CM                                             */
+/*============================================================================*/
 
-/*****************************************************************************************************
-* Include files
-*****************************************************************************************************/
+/* Includes */
+/* -------- */
 
-/** Core modules */
 /** MCU derivative information */
 #include "MCU_derivative.h"
 /** Variable types and common definitions */
@@ -22,45 +34,93 @@
 /* GPIO routines prototypes */ 
 #include "GPIO.h"
 
-/** Used modules */
+/* Functions macros, constants, types and datas         */
+/* ---------------------------------------------------- */
+/* Functions macros */
+
+/*==================================================*/ 
+/* Definition of constants                          */
+/*==================================================*/ 
+/* BYTE constants */
 
 
-/*****************************************************************************************************
-* Definition of module wide VARIABLEs 
-
-*****************************************************************************************************/		
-	T_SBYTE rsb_BarLed=0; /* variable that controls the bar led */
-
-/*****************************************************************************************************
-* Declaration of module wide FUNCTIONs 
-*****************************************************************************************************/
-
-/*****************************************************************************************************
-* Definition of module wide MACROs / #DEFINE-CONSTANTs 
-*****************************************************************************************************/
-
-/*****************************************************************************************************
-* Declaration of module wide TYPEs 
-*****************************************************************************************************/
-
-/*****************************************************************************************************
-* Definition of module wide (CONST-) CONSTANTs 
-*****************************************************************************************************/
-
-/*****************************************************************************************************
-* Code of module wide FUNCTIONS
-*****************************************************************************************************/
+/* WORD constants */
 
 
-/****************************************************************************************************/
-/**
-* \brief    Configures individual GPIO pins to either input or output functionality.  
-* \author   Abraham Tezmol
-* \param    uint8_t channel - GPIO channel to be configured
-* \param    uint8_t input_output - selection of input/output functionality (has impact on output impedance selection)
-* \param    uint8_t Open_drain - Push pull or open drain selection modes 
-* \return   void
-*/
+/* LONG and STRUCTURE constants */
+
+
+
+/*======================================================*/ 
+/* Definition of RAM variables                          */
+/*======================================================*/ 
+/* BYTE RAM variables */
+T_SBYTE rsb_BarLed=0; 		/* variable that controls the bar led */
+
+/* WORD RAM variables */
+
+
+/* LONG and STRUCTURE RAM variables */
+
+
+/*======================================================*/ 
+/* close variable declaration sections                  */
+/*======================================================*/ 
+
+/* Private defines */
+#define GPIO_INPUT					0
+#define GPIO_OUTPUT					1
+#define GPIO_OPEN_DRAIN_DISABLE		0
+#define GPIO_OPEN_DRAIN_ENABLE		1
+
+/* Private functions prototypes */
+/* ---------------------------- */
+void vfnGPIO_Output(uint8_t channel, uint8_t logical_value);
+void vfnGPIO_FlashMainLED(void);
+
+
+/* Exported functions prototypes */
+/* ----------------------------- */
+
+/* Inline functions */
+/* ---------------- */
+/**************************************************************
+ *  Name                 : inline_func	2
+ *  Description          :
+ *  Parameters           :  [Input, Output, Input / output]
+ *  Return               :
+ *  Critical/explanation :    [yes / No]
+ **************************************************************/
+
+
+/* Private functions */
+/* ----------------- */
+/**************************************************************
+ *  Name                 : 	vfnGPIO_Output
+ *  Description          : 	Drive the logical output value to the pin
+ *  Parameters           :  uint8_t channel - GPIO channel to be configured
+ 							uint8_t logical_value - select the output value
+ *  Return               :	void
+ *  Critical/explanation :    [yes / No]
+ **************************************************************/
+
+void vfnGPIO_Output(uint8_t channel, uint8_t logical_value)
+{
+    SIU.GPDO[channel].B.PDO  = logical_value;  		/* Drive the logical output value to the pin */
+
+}
+
+/* Exported functions */
+/* ------------------ */
+/**************************************************************
+ *  Name                 :	vfnGPIO_Init_channel
+ *  Description          :  Configures individual GPIO pins to either input or output functionality.
+ *  Parameters           :  uint8_t channel - GPIO channel to be configured
+ 							uint8_t input_output - selection of input/output functionality (has impact on output impedance selection)
+ 							uint8_t Open_drain - Push pull or open drain selection modes	
+ *  Return               :	void
+ *  Critical/explanation :    [yes / No]
+ **************************************************************/
 
 void vfnGPIO_Init_channel(uint8_t channel, uint8_t input_output, uint8_t Open_drain)
 {
@@ -85,77 +145,13 @@ void vfnGPIO_Init_channel(uint8_t channel, uint8_t input_output, uint8_t Open_dr
 
 }
 
-/****************************************************************************************************/
-/**
-* \brief    Configures individual GPIO pins to either input or output functionality.  
-* \author   Abraham Tezmol
-* \param    uint8_t channel - GPIO channel to be configured
-* \param    uint8_t input_output - selection of input/output functionality (has impact on output impedance selection)
-* \param    uint8_t Open_drain - Push pull or open drain selection modes 
-* \return   void
-*/
-void vfnGPIO_Output(uint8_t channel, uint8_t logical_value)
-{
-    SIU.GPDO[channel].B.PDO  = logical_value;  		/* Drive the logical output value to the pin */
-
-}
-
-
-
-/****************************************************************************************************/
-/**
-* \brief    Turn a combination of 3 LEDs with a unique blinking pattern, this funcation shall be 
-* \brief    called periodically to operate. 
-* \author   Abraham Tezmol
-* \param    void
-* \return   void
-*/
-void vfnGPIO_FlashMainLED(void)
-{
-    static uint8_t u8Counter = 0;
-    
-    u8Counter++;
-    switch (u8Counter)
-    {
-    case  1:
-            LED_ON(LED1);
-            LED_ON(LED2);
-            break;
-    case  11:
-            LED_ON(LED3);
-            LED_ON(LED4);                     
-            break;
-    case  21:
-            LED_ON(LED2);
-            LED_ON(LED3);                     
-            break;        
-    case  3:
-            LED_OFF(LED1);
-            LED_OFF(LED2);
-            break;
-    case  13:
-            LED_OFF(LED3);
-            LED_OFF(LED4);
-            break;                          
-    case  23:
-            LED_OFF(LED2);
-            LED_OFF(LED3);
-            break;        
-	case 100:
-		u8Counter = 0;
-		break;
-    }
-}
-
-
-/****************************************************************************************************/
-/**
-* \brief    Initialize GPIO port connected to LEDs on eval board
-* \author   Abraham Tezmol
-* \param    void 
-* \return   void
-*/
-
+/**************************************************************
+ *  Name                 :	vfnGPIO_LED_Init
+ *  Description          :  Initialize GPIO port connected to LEDs and buttons
+ *  Parameters           :  [Input, Output, Input / output]
+ *  Return               :	void
+ *  Critical/explanation :    [yes / No]
+ **************************************************************/
 
 void vfnGPIO_LED_Init(void)
 {
@@ -179,12 +175,6 @@ void vfnGPIO_LED_Init(void)
 	vfnGPIO_Init_channel(LED_GREEN,GPIO_OUTPUT,GPIO_OPEN_DRAIN_DISABLE);  /* PE7 --> LED6*/
 	vfnGPIO_Output (LED_GREEN, 0);
 	
-
-	
-	
-	
-	
-	
     for(rsb_BarLed=0; rsb_BarLed<10; rsb_BarLed++)  /* PA0 - PA9 --> Bar led */
     {
     	vfnGPIO_Init_channel(rsb_BarLed,GPIO_OUTPUT,GPIO_OPEN_DRAIN_DISABLE);  
@@ -194,23 +184,30 @@ void vfnGPIO_LED_Init(void)
     rsb_BarLed=9;
 }
 
-/****************************************************************************************************/
-/**
-* \brief    turn on and turn off leds of the bar led
-* \author   Diego
-* \param    T_SBYTE 
-* \return   void
-*/
-
+/**************************************************************
+ *  Name                 :	WINDOW_BARLED_OPEN
+ *  Description          :  Turn off Barled's Leds 
+ *  Parameters           :  T_SBYTE lsb_BarLed - It is the position of the window (Barled) 
+ *  Return               :	void
+ *  Critical/explanation :    [yes / No]
+ **************************************************************/
 
 void WINDOW_BARLED_OPEN (T_SBYTE lsb_BarLed) /* Turn off one led of the bar led */
 {	
 	LED_OFF(lsb_BarLed);
 }
-	
+
+/**************************************************************
+ *  Name                 :	WINDOW_BARLED_CLOSE
+ *  Description          :  Turn on Barled's Leds 
+ *  Parameters           :  T_SBYTE lsb_BarLed - It is the position of the window (Barled) 
+ *  Return               :	void
+ *  Critical/explanation :    [yes / No]
+ **************************************************************/
 
 void WINDOW_BARLED_CLOSE (T_SBYTE lsb_BarLed) /* Turn on one led of the bar led */
 {
 	LED_ON(lsb_BarLed);
 }
+
 /****************************************************************************************************/
